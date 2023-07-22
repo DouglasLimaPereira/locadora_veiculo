@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\MarcaRequest;
 use App\Models\Marca;
+use App\Repositories\MarcaRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -17,9 +18,25 @@ class MarcaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json($this->marca->with('modelos')->get());
+        $marcaRepository = new MarcaRepository($this->marca);
+
+        if ($request->has('atributos_modelos')) {
+            $marcaRepository->selectAtributosRegistros('modelos:'.$request['atributos_modelos']);
+        }else{
+            $marcaRepository->selectAtributosRegistros('modelos');
+        }
+
+        if ($request->has('filtro')) {
+            $marcaRepository->filtro($request['filtro']);
+        }
+
+        if ($request->has('atributos')) {
+            $marcaRepository->selectAtributos($request['atributos']);
+        }
+
+        return response()->json($marcaRepository->getResultado());
     }
 
     /**
