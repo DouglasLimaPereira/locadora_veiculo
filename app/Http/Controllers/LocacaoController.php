@@ -99,10 +99,10 @@ class LocacaoController extends Controller
     {
         $locacao = $this->locacao->find($id);
         if ($locacao === null) {
-            return response()->json(['error' => 'Não foi possível realizar a exclusão de cliente, cliente pesquisado não encontrada!!!'], 404);
+            return response()->json(['error' => 'Não foi possível realizar a exclusão de Locação, Locação pesquisado não encontrada!!!'], 404);
         }
         $locacao->delete();
 
-        return response()->json('Cliente removido com sucesso!!!');
+        return response()->json('Locação removido com sucesso!!!');
     }
 }

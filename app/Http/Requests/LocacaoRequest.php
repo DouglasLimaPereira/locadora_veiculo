@@ -11,7 +11,7 @@ class LocacaoRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,14 @@ class LocacaoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'carro_id' => 'required',
+            'cliente_id' => 'required',
+            'data_final_previsto_periodo' => 'required',
+            'data_final_realizado_periodo' => 'required',
+            'data_inicio_periodo' => 'required',
+            'km_final' => 'required',
+            'km_inicial' => 'required',
+            'valor_diaria' => 'required',
         ];
     }
 }
