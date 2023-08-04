@@ -23,7 +23,7 @@ class MarcaRequest extends FormRequest
     {
         return [
                 'nome' => 'required|unique:marcas,nome,'.$this->id,
-                'imagem' => 'required|file|mimes:png',
+                'imagem' => 'file|mimes:png',
         ];
     }
 
@@ -38,7 +38,6 @@ class MarcaRequest extends FormRequest
             'nome.required' => 'Necessário informar o nome da marca',
             'nome.unique' => 'Nome da marca já cadastrado',
             'imagem.mines' => 'O arquivo deve ser de extenssão ( .png )',
-            'imagem.required' => 'Necessário informar a imagem da marca',
         ];
     }
 }

@@ -6,21 +6,54 @@
 
 import './bootstrap';
 import { createApp } from 'vue';
-
+import { createStore } from 'vuex';
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
  * registering components with the application instance so they are ready
  * to use in your application's views. An example is included for you.
  */
 
+const store = createStore({
+    state: {
+        item: {},
+        transacao: {
+          status: '', mensagem: ''
+        }
+      }
+});
+
 const app = createApp({});
 
+app.use(store)
 import ExampleComponent from './components/ExampleComponent.vue';
 app.component('example-component', ExampleComponent);
 
 import Login from './components/Login.vue';
 app.component('login-component', Login);
 
+import Home from './components/Home.vue';
+app.component('home-component', Home);
+
+import Marca from './components/Marca.vue';
+app.component('marca-component', Marca);
+
+import InputContainer from './components/InputContainer.vue';
+app.component('input-container-component', InputContainer);
+
+import Table from './components/Table.vue';
+app.component('table-component', Table);
+
+import Card from './components/Card.vue';
+app.component('card-component', Card);
+
+import Modal from './components/Modal.vue';
+app.component('modal-component', Modal);
+
+import Alert from './components/Alert.vue';
+app.component('alert-component', Alert);
+
+import Paginate from './components/Paginate.vue';
+app.component('paginate-component', Paginate);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

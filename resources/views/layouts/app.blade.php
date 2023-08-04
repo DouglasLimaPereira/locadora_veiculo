@@ -13,6 +13,23 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
+    <link rel="stylesheet" href="{{ asset('fontawesome/css/all.css') }}">
+    <link rel="stylesheet" href="{{ asset('fontawesome/css/all.min.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('fontawesome/css/brands.css') }}">
+    <link rel="stylesheet" href="{{ asset('fontawesome/css/brands.min.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('fontawesome/css/fontawesome.css') }}">
+    <link rel="stylesheet" href="{{ asset('fontawesome/css/fontawesome.min.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('fontawesome/css/regular.css') }}">
+    <link rel="stylesheet" href="{{ asset('fontawesome/css/regular.min.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('fontawesome/css/solid.css') }}">
+    <link rel="stylesheet" href="{{ asset('fontawesome/css/solid.min.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('fontawesome/css/svg-with-js.css') }}">
+
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
@@ -30,7 +47,26 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
+                        @auth
+                            <li class="nav-item">
+                                <a class="nav-link" href=""> Clientes</a>
+                            </li>
 
+                            <li class="nav-item">
+                                <a class="nav-link" href="">Locação</a>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="" data-bs-toggle="dropdown">Veiculos</a>
+                                <div class="dropdown-menu">
+                                    <a href="" class="dropdown-item">Carro</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="{{route('marcas')}}" class="dropdown-item">Marca</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="" class="dropdown-item">Modelo</a>
+                                </div>
+                            </li>
+                        @endauth
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -72,9 +108,36 @@
             </div>
         </nav>
 
+        @auth
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{Route::currentRouteName()}}</li>
+                </ol>
+            </nav>    
+        @endauth
+        
         <main class="py-4">
             @yield('content')
         </main>
     </div>
+
+    <!-- Scripts -->
+    <script src="{{ asset('fontawesome/js/all.js') }}"></script>
+    <script src="{{ asset('fontawesome/js/all.min.js') }}"></script>
+
+    <script src="{{ asset('fontawesome/js/brands.js') }}"></script>
+    <script src="{{ asset('fontawesome/js/brands.min.js') }}"></script>
+
+    <script src="{{ asset('fontawesome/js/fontawesome.js') }}"></script>
+    <script src="{{ asset('fontawesome/js/fontawesome.min.js') }}"></script>
+
+    <script src="{{ asset('fontawesome/js/regular.js') }}"></script>
+    <script src="{{ asset('fontawesome/js/regular.min.js') }}"></script>
+
+    <script src="{{ asset('fontawesome/js/solid.js') }}"></script>
+    <script src="{{ asset('fontawesome/js/solid.min.js') }}"></script>
+
+    <script src="{{ asset('fontawesome/js/v4-shims.js') }}"></script>
 </body>
 </html>

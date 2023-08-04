@@ -36,7 +36,7 @@ class MarcaController extends Controller
             $marcaRepository->selectAtributos($request['atributos']);
         }
 
-        return response()->json($marcaRepository->getResultado());
+        return response()->json($marcaRepository->getResultadoPaginado(3));
     }
 
     /**
@@ -86,25 +86,34 @@ class MarcaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(MarcaRequest $request, $id)
+    public function update(Request $request, $id)
     {
         $marca = $this->marca->find($id);
         
         if ($marca === null) {
             return response()->json(['error' => 'Não foi possível realizar a atualização de Marca, Marca solicitada não encontrada!!!'], 404);
         }
-
-        if ($request['imagem'] != '') {
-            Storage::disk('public')->delete($marca->imagem);
+        elseif ($request['nome'] == '') {
+            return response()->json(['error' => 'Não foi possível realizar a atualização de Marca, Necessário informar nome da marca'], 404);
         }
-        $imagem = $request['imagem'];
-        $imagem_nome = $imagem->store('logos', 'public');
-        
-        $marca->update([
-            'nome' => $request['nome'],
-            'imagem' => $imagem_nome,
-        ]);
 
+        if ($request->file('imagem') != '') {
+            if (Storage::disk('public')->exists($marca->imagem)) {
+                Storage::disk('public')->delete($marca->imagem);
+            }
+        
+            $imagem = $request->file('imagem');
+            $imagem_nome = $imagem->store('logos', 'public');
+            $marca->update([
+                'nome' => $request['nome'],
+                'imagem' => $imagem_nome,
+            ]);
+        }else{
+            $marca->update([
+                'nome' => $request['nome']
+            ]);
+        }
+        
         return $marca; 
     }
 
